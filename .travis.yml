@@ -1,0 +1,40 @@
+dist:     xenial
+sudo:     required  
+
+language: cpp    
+
+compiler:
+    - gcc
+
+env:
+  global:
+    - secure: "nUZrRIPeLDMvshqSSoTXpfDF103U85QEHWfMOIxZGoxpIBLiSlfN6x11QfjMMxqgZpU/ya34CKZ1FlEFx0SQm7Gg6XiPTnfEbSZa9AysiTi0475layd+4aPQkxifFWdrumQnOOY8MSMxG9YjBrvoXpJxN4XkYfgmPYOmCRI0MYSrxz+gqTWaIYV5R7NiGnPTZaMuaY+74bWI3bjDaMXq0bSwL7HV/M4p2oJl8ziH2MwKJkimUYPzMgx+dM44QfupVKdXdMru52prjSloR0yWqzsJMdQk5GyvMbXV6/MKiDl4qruYOnwugbw8AAdYK4J6Lyz1UEloXdFH/jfY0vVG3yC3Vy4zwCTy2AFn+qa5jxEGS2DG6kW30kJEDamOrm9b9vuOsJVqLviQNdhLTYqYwkazbHmn5sBvQf8wzXR9ue+9DJIYPEM6hlL9hxPGVNc3FNzr3bUabekEYOH7pGV+BzJMGALZk3/+YZ6DPf0uUTyfUdd3nTTtnSyHr+6XqxtqTk9a7l93jrHN+6XXnWXHh+8RRhu3Mk2kRr4y+ZTr4F0l2Xepw97f+VAOpLjVP6hEsUN6gvK7B0333VmYZ1BDdfsstHgPWenqp9xagR+HCPk7xISsM8Wwj18OYHzO2huwjUkyzspc+MMbUulTzI+hrqDb8f7X8bVEWKTNwbPN6KI="
+    - secure: "OlAwk6Xpu73fShzb8/t8IQ+my4Z2YjG8bKMx1CPxq1i2sQsfCgGuZOZb5Q+txa+0VE/Y+KeMCF8ihCcOayTwE+Qo+o4Oq41svNB6SwjmvhtnmSf+g6Gjf+ozmRuqPsqs4ZXuJp0QWPq0m4XDtUeEcaRh0AcIoY8DS1AyFb/+7DbKwo49mBzcDlCHCOHYVFOy47M5vyS7sbZ4NSNoyy7fidZ0siyZJytevHvHoIzwT6ccJPCdnn8O40iIuCaTnpy73MYies1ogXItKl99JklY9jyNGNTaBn8RWgF4KDv1Uc44MAqD2sapNgYCABdnfWzi+/129nZWN8pSWh9KbzxAXcraDLwW7lnjrzpZvIlYuw8bI42CJMk2o27rlRLWMcw4gzYP5zQUYGuCYbKgpprX4asMj0RpGFe6XYXhjn8SqprcTWteFnXD6Scm6bxOTsH/YJwiuoN+lFTJP+nOKst6eajHXveVEfrwT5Uaf44IiEvfkApkAmANGAiOX07yu+fMJ/4JoQ8pts+S61G4C6uqbWtiyEc3w2FmkghWRJqIU4ciYI4FLnp7s+Q+ut6s6Iylw7cLnRceDEOxxzQfEt7Ctzf9cxjx7yIrb6Usa4l7jSFN9T3TUFjAGjeHQV1+I2Y5a4ZwdWGuWAnlF09rJnZrizcNWlJOq2QRUWKMuQWN4l8="
+    - secure: "dNn5BWfiSv6RdmxeA+3UppvbTevKa9d9spBSGQKMw4rcQVTJ4a9PqdBZVNrCZlN+ajUIJiD6YZS1OTpyjiQy0rwrSs1iL9Rv01ZtQuq3vClFKXwG24uvZZA0iiKP0Lbd5z/4DbP1HzbwosknepGhQc1v2oAZltKqTq0r7EMznzCtX+JTAmidw6l3/52bL8CQYACM6oYUmc9SAQW61pVJjwTpdWDI6KUmIqyBZaoLomDKNrGvwQbLg5ltYoFSZntRweE4wTQBTcI63EdYRBwf9MNIoWyus6wzvzBesmfrsd54l+MGlxBj/EBRP0hCp9RfFcQ5lOKVoKTL9EmERFxDDN6hEpA7fS9Yev5qwoDrQMvUjrcYN0QxKGgCfcZTqhA2HA+coyBJyCrLHT8Ju+6jfve/6cUJWULtbmT4gybjR0X7/HZ9cU/iCyoyAgk9XZpyOp1h/I9rC/C38D46Gg2/w0j5wuinodEe8evwE1bT9Iz6HI9BL6lDUYnUZuQ51czWnDVkoYBXW410SD/7q5cc2Zf8cV/lnfGCqv1JXZ8Y12/ziI79Vsz13vIG2xT1U0Tt1kUTDT8tzF4ydDl/5ERhEfr0yK/kQhWxe7G8RigAmoOf7UP2x9/bXvKTwpAftIH1hO29rbWTYg24YESMGBikCoqvb5VSeUVse2ZeAsD5RRQ="
+    - COMMIT=${TRAVIS_COMMIT::8}
+
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    - llvm-toolchain-precise-3.8
+    packages:
+    - g++-7
+install:
+  - "[ $CXX = g++ ] && export CXX=g++-7 || true"
+  - source install.sh
+
+script:
+  - sudo cmake CMakeLists.txt
+  - sudo cmake --build . --target server
+  - sudo cmake --build . --target client
+  - sudo cmake --build . --target build_and_test
+
+after_success:
+  - docker login -u $DOCKER_USER -p $DOCKER_PASS
+  - export REPO=p0sixedfalls/restest
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+  - docker build . -t $REPO:$COMMIT
+  - docker tag $REPO:$COMMIT $REPO:$TAG
+  - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
+  - docker push $REPO
