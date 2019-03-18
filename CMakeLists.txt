@@ -15,6 +15,8 @@ target_link_libraries(server ${LIBEVENT_NAME})
 add_executable(client "src/client/main.cpp" "src/client/util.cpp" "src/client/httpreq.h" "src/client/util.h")
 target_link_libraries(client ${LIBEVENT_NAME})
 
+add_executable(service "src/service/client_service.cpp")
+
 link_directories("${LIBEVENT_LIB_DIR}/")
 
 include_directories("${LIBEVENT_INCLUDE_DIR}")
