@@ -32,7 +32,7 @@ The server application may use these optional options:
 	                Example -server 127.0.0.1 -port 8080
 
 # How to build
-The server and client are disegned only for **Linux** based systems, so you should build it only on Linux(for example, Ubuntu).
+The server and client are designed only for **Linux** based systems, so you should build it only on Linux(for example, Ubuntu).
 
 Open the terminal and use the following commands to build:
 
@@ -119,6 +119,10 @@ Now you can check all commands of client:
 	GLOBAL OPTIONS
 		--help - shows utility information or information about command
 		--version - shows version information
+
+Docker Hub link:
+
+	https://cloud.docker.com/repository/docker/p0sixedfalls/restful	
 
 # Built with
   * [googletest](https://github.com/google/googletest)

@@ -43,24 +43,24 @@ namespace CLIINFO
  		"--version - shows version information";
 
     const string HELP_AND_VERSION = "Description:\n\t"
-            "Command \"version\" shows which interface version use server\n"
- 	    "Using:\n\t"
+            "Command \"version\" shows which interface version use the server\n"
+ 	    "Usage:\n\t"
         "version [server option] <server argument> [port argument] <port argument>\n\t"
  		"if arguments is not declared then will be used default address <127.0.0.1> and port <8080>\n"
         "Example:\n\t"
         "version -server 127.0.0.1 -port 8080";
 
     const string HELP_AND_LIST = "Description:\n\t"
-            "Command \"list\" shows which network interfaces use server\n"
- 	    "Using:\n\t"
+            "Command \"list\" shows which network interfaces use the server\n"
+ 	    "Usage:\n\t"
         "list [server option] <server argument> [port argument] <port argument>\n\t"
  		"if arguments is not declared then will be used default address <127.0.0.1> and port <8080>\n"
         "Example:\n\t"
         "list -server 127.0.0.1 -port 8080";
     
     const string HELP_AND_SHOW = "Description:\n\t"
-            "Command \"show\" shows information about network interface of server\n"
- 	    "Using:\n\t"
+            "Command \"show\" shows information about network interface of the server\n"
+ 	    "Usage:\n\t"
         "show [name option] <server argument> [port argument] <port argument>\n\t"
  		"if arguments is not declared then will be used default address <127.0.0.1> and port <8080>\n"
         "Example:\n\t"
